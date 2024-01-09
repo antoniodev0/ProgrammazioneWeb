@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - FooD Day</title>
+    <link rel="stylesheet" href="css/login.css"> 
+    <script src="js/login.js"></script>
+</head>
+<body>
+    <div class="login-container">
+        <div id="login-errors"></div>
+        <form action="php/login.php" method="POST" id="login-form">
+            <h2>Login</h2>
+            <input type="text" id="username" name="username" placeholder="Username" required>
+            <input type="password" id="password" name="password" placeholder="Password" required>
+            <button type="submit">Accedi</button>
+        </form>
+    </div>
+</body>
+</html>
