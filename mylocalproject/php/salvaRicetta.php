@@ -48,12 +48,7 @@ function saveRecipeAsFavorite($conn) {
 function getUserFavoriteRecipes($conn) {
     session_start();
     if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-        if (!isset($_SESSION['username'])) {
-            http_response_code(401);
-            echo json_encode(['status' => 'error', 'message' => 'Utente non autenticato']);
-            return;
-        }
-
+        
         // Ottieni l'ID dell'utente
         $userId = getUserIdByUsername($conn, $_SESSION['username']);
 
