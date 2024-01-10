@@ -37,12 +37,6 @@ if ($method === 'POST' && isset($_POST['ricettaId'])) {
     
     $ricettaId = $_POST['ricettaId'];
     
-    if (!isset($_SESSION['username'])) {
-        http_response_code(401);
-        echo json_encode(['status' => 'error', 'message' => 'Utente non autenticato']);
-        exit;
-    }
-    
     // Ottieni l'ID dell'utente
     $userId = getUserIdByUsername($conn, $_SESSION['username']);
     // Rimuovi la ricetta dai preferiti
