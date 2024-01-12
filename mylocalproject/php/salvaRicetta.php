@@ -12,9 +12,6 @@ switch ($method) {
     case 'POST':
         saveRecipeAsFavorite($conn);
         break;
-    case 'GET':
-        getUserFavoriteRecipes($conn);
-        break;
     default:
         // Metodo non supportato
         http_response_code(405);
@@ -45,20 +42,7 @@ function saveRecipeAsFavorite($conn) {
     }
 }
 
-function getUserFavoriteRecipes($conn) {
-    session_start();
-    if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-        
-        // Ottieni l'ID dell'utente
-        $userId = getUserIdByUsername($conn, $_SESSION['username']);
 
-        // Ottieni le ricette preferite dell'utente
-        $favoriteRecipes = getFavoriteRecipes($conn, $userId);
-
-        // Ritorna la risposta in formato JSON
-        echo json_encode(['favorites' => $favoriteRecipes]);
-    }
-}
 
 // Funzione per ottenere l'ID dell'utente dal database
 function getUserIdByUsername($conn, $username) {
@@ -86,18 +70,7 @@ function saveRecipe($conn, $userId, $ricettaId) {
     return $stmt->execute();
 }
 
-// Funzione per ottenere le ricette preferite di un utente
-function getFavoriteRecipes($conn, $userId) {
-    $favoriteRecipes = [];
-    $stmt = $conn->prepare("SELECT * FROM ricette_preferite WHERE user_id = ?");
-    $stmt->bind_param("i", $userId);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    while ($row = $result->fetch_assoc()) {
-        $favoriteRecipes[] = $row['ricetta_id'];
-    }
-    return $favoriteRecipes;
-}
+
 
 // Chiudi la connessione al termine dell'elaborazione
 $conn->close();
