@@ -12,14 +12,6 @@ function getUserIdByUsername($conn, $username) {
     return $user['id'];
 }
 
-// Funzione per verificare se una ricetta è già stata salvata come preferita dall'utente
-function isRecipeSaved($conn, $userId, $ricettaId) {
-    $stmt = $conn->prepare("SELECT * FROM ricette_preferite WHERE user_id = ? AND ricetta_id = ?");
-    $stmt->bind_param("ii", $userId, $ricettaId);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    return $result->num_rows > 0;
-}
 
 // Funzione per rimuovere una ricetta dai preferiti dell'utente
 function removeRecipeFromFavorites($conn, $userId, $ricettaId) {
